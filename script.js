@@ -154,6 +154,22 @@ function openFullscreen(e) {
     fullscreen = !fullscreen;
   }
 
+  let isMouseDown = false;
+  
+  // Video forward/reverse using key presss arrow up/down
+  function handleKeypress(e) {
+    switch (e.key) {
+        case " ":
+            togglePlay();
+        case "ArrowRight":
+            video.currentTime += 5;
+        case "ArrowLeft":
+            video.currentTime -= 5;
+        default:
+            return;
+    }
+}
+
 // Event listeners
 playBtn.addEventListener('click', togglePlay);
 video.addEventListener('click', togglePlay);
@@ -164,3 +180,6 @@ volumeRange.addEventListener('click', changeVolume);
 volumeIcon.addEventListener('click', toggleMute);
 speed.addEventListener('change', changeSpeed);
 fullscreenBtn.addEventListener('click', toggleFullscreen);
+window.addEventListener('mousedown', () => isMouseDown = true);
+window.addEventListener('mouseup', () => isMouseDown = false);
+window.addEventListener('keydown', handleKeypress);
